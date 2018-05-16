@@ -16,15 +16,41 @@ class Enemy {
 	// Update the enemy's position, required method for game
 	// Parameter: dt, a time delta between ticks
 	update(dt) {
-    	// You should multiply any movement by the dt parameter
-    	// which will ensure the game runs at the same speed for
-    	// all computers.
-    	//this.x = this.x +(this.speed *dt);
+		// when the enemy reaches the end of the road, it resets to beginning
+    	if (this.x < 500) {
+    		// You should multiply any movement by the dt parameter
+    		// which will ensure the game runs at the same speed for
+    		// all computers.
+    		this.x = this.x +(this.speed *dt);
+    	} else {
+    		this.x = -15;
+    	}
+    	
+    	//console.log(this.x);
+
+    	/*for (this.x in allEnemies) {
+	    	if (this.x === 500) {
+	    		console.log('x=500');
+				
+			}*/
+	
 	}
 	// Draw the enemy on the screen, required method for game
 	render() {
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	}
+
+	/*checkCollisions() {
+		console.log('check');
+		for (enemy in allEnemies) {
+			if (enemy.x === player.x) {
+				console.log('crash'); 
+			}
+		}
+
+
+		
+	}*/
 };
 
 
@@ -122,8 +148,10 @@ class Player {
 // Place the player object in a variable called player
 let player = new Player(202,400);
 let allEnemies = [];
-let enemy1 = new Enemy(-25, 60);
-allEnemies.push(enemy1);
+let enemy1 = new Enemy(-15, 60);
+let enemy2 = new Enemy(-15, 150);
+let enemy3 = new Enemy(-15, 230);
+allEnemies.push(enemy1, enemy2, enemy3);
 
 
 // This listens for key presses and sends the keys to your
