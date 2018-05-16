@@ -60,7 +60,15 @@ class Player {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-	//console.log("Updated");
+
+
+	//if the player gets to the water, after 1.5s, player returns to initial location
+	if (this.y === -15) {
+			setTimeout(() => {
+				this.x = 202;
+				this.y = 400;
+			}, 1500);
+		} 
 	}
 
 	handleInput(key) {

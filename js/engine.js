@@ -63,9 +63,11 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
+        //alert("begin");
         reset();
         lastTime = Date.now();
         main();
+        //alert("eindig");
     }
 
     /* This function is called by main (our game loop) and itself calls all
