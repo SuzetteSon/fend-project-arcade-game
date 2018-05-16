@@ -25,14 +25,6 @@ class Enemy {
     	} else {
     		this.x = -15;
     	}
-    	
-    	//console.log(this.x);
-
-    	/*for (this.x in allEnemies) {
-	    	if (this.x === 500) {
-	    		console.log('x=500');
-				
-			}*/
 	
 	}
 	// Draw the enemy on the screen, required method for game
@@ -65,14 +57,9 @@ class Enemy {
 // a handleInput() method.
 class Player {
 	constructor(x,y) {
-		// Variables applied to each of our instances go here,
-    	// we've provided one for you to get started
 		this.x = x
 		this.y = y
-		// The image/sprite for our enemies, this uses
-    	// a helper we've provided to easily load images
 		this.sprite = 'images/char-boy.png';
-		this.allowed = true;
 	}
 
 
@@ -88,13 +75,22 @@ class Player {
     // all computers.
 
 
-	//if the player gets to the water, after 1.5s, player returns to initial location
-	if (this.y === -15) {
-			setTimeout(() => {
+		//if the player gets to the water, after 1.5s, player returns to initial location
+		if (this.y === -15) {
+				setTimeout(() => {
+					this.x = 202;
+					this.y = 400;
+				}, 1500);
+			} 
+		//check for collissions and reset player if collission occurs
+		for ( let enemy of allEnemies) {
+			console.log('check');
+			if (Math.abs(enemy.x - this.x) < 75 && Math.abs(enemy.y - this.y) < 78) {
 				this.x = 202;
-				this.y = 400;
-			}, 1500);
-		} 
+				this.y = 400; 
+			}
+		}
+
 	}
 
 	handleInput(key) {
