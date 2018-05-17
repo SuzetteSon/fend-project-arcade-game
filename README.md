@@ -1,6 +1,42 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+**Basic Functionality**
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+In this game there is a Player and Enemies (Bugs). The goal of the player is to reach the water, without colliding into any one of the enemies. The player can move left, right, up and down. The enemies move in varying speeds on the paved block portion of the scene. Once a the player collides with an enemy, the game is reset and the player moves back to the start square. Once the player reaches the water the game is won. 
+
+**Additional Functionality**
+
+Score: I implemented a score for the game. Every win increases the score, and every collission decreases the score to a minimum of zero.
+
+**I needed to implement the Player and the Enemy classes, using Object-Oriented JavaScript.**
+
+The Enemy function, which initiates the Enemy by:
+ - Loading the image by setting this.sprite to the appropriate image in the image folder
+ - Setting the Enemy initial location 
+ - Setting the Enemy speed 
+ - The update method for the Enemy
+     - Updates the Enemy location 
+ - The render method for the Enemy
+
+The Player function, which initiates the Player by:
+ - Loading the image by setting this.sprite to the appropriate image in the image folder
+ - Setting the Player initial location
+ - The update method for the Player 
+    - which also handles the collission with enemies 
+    - and the winning condition (player reaches water, game resets)
+ - The render method for the Player
+ - The handleInput method, which receives user input, allowedKeys (the key which was pressed) and moves the player              according to that input. In particular:
+     - Left key should move the player to the left, right key to the right, up should move the player up and down should            move the player down.
+     - The player cannot move off screen so I set parameters for that
+
+**I created a Game function, which initiates the Game by:**
+
+ - increasing the score when the player reaches the water
+ - decreasing the score when the player collides with an enemy to a minimum of 0
+
+**I instantiate them by:**
+
+ - Creating a new Player object.
+ - Creating several new Enemies objects and placing them in an array called allEnemies.
+ - Creating a new Game object and setting the starting score to zero.
