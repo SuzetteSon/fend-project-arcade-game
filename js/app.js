@@ -17,7 +17,7 @@ class Enemy {
 	// Parameter: dt, a time delta between ticks
 	update(dt) {
 		// when the enemy reaches the end of the road, it resets to beginning
-    	if (this.x < 500) {
+    	if (this.x < 503) {
     		// You should multiply any movement by the dt parameter
     		// which will ensure the game runs at the same speed for
     		// all computers.
@@ -31,7 +31,6 @@ class Enemy {
 	render() {
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	}
-
 };
 
 
@@ -44,6 +43,7 @@ class Player {
 		this.y = y
 		this.sprite = 'images/char-pink-girl.png';
 		this.win = false;
+		this.lose = false;
 	}
 
 
@@ -77,7 +77,8 @@ class Player {
 			if (Math.abs(enemy.x - this.x) < 75 && Math.abs(enemy.y - this.y) < 75) {
 				this.x = 202;
 				this.y = 400; 
-
+				this.lose = true;
+				game.decreaseScore();
 			}
 		}
 
@@ -135,12 +136,15 @@ class GameLogic {
 			document.getElementById('score').innerText = this.score;
 		}
 	}
+	decreaseScore() {
+		console.log("decrease");
+		if ((player.lose === true) && (this.score > 0))  {
+			console.log(this.score);
+			this.score -= 1;
+			document.getElementById('score').innerText = this.score;
+		}
+	}
 };
-
-
-
-
-
 
 
 // Now instantiate your objects.
@@ -152,6 +156,16 @@ let enemy1 = new Enemy(-15, 60);
 let enemy2 = new Enemy(-15, 150);
 let enemy3 = new Enemy(-15, 230);
 allEnemies.push(enemy1, enemy2, enemy3);
+
+/*window.setInterval(function () {
+  allEnemies.push(new Enemy(-15, 60));
+  allEnemies.push(new Enemy(-15, 150));
+  allEnemies.push(new Enemy(-15, 230));
+
+}, 4000);*/
+
+
+
 let game = new GameLogic(0);
 document.getElementById('score').innerText = game.score;
 
