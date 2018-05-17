@@ -32,24 +32,7 @@ class Enemy {
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	}
 
-	/*checkCollisions() {
-		console.log('check');
-		for (enemy in allEnemies) {
-			if (enemy.x === player.x) {
-				console.log('crash'); 
-			}
-		}
-
-
-		
-	}*/
 };
-
-
-
-
-
-
 
 
 // Now write your own player class
@@ -59,7 +42,8 @@ class Player {
 	constructor(x,y) {
 		this.x = x
 		this.y = y
-		this.sprite = 'images/char-boy.png';
+		this.sprite = 'images/char-pink-girl.png';
+		this.win = false;
 	}
 
 
@@ -67,6 +51,7 @@ class Player {
 	render() {
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	}
+
 	// Update the player's position, required method for game
 	// Parameter: dt, a time delta between ticks
 	update() {
@@ -74,20 +59,25 @@ class Player {
     // which will ensure the game runs at the same speed for
     // all computers.
 
-
-		//if the player gets to the water, after 1.5s, player returns to initial location
+		//if the player gets to the water, after 1s, player returns to initial location
+		//win condition = true
+		
 		if (this.y === -15) {
-				setTimeout(() => {
-					this.x = 202;
-					this.y = 400;
-				}, 1500);
+				
+			this.win = true;
+			console.log(this.win);
+			this.x = 202;
+			this.y = 400;
+			game.increaseScore();
 			} 
+
 		//check for collissions and reset player if collission occurs
+
 		for ( let enemy of allEnemies) {
-			console.log('check');
-			if (Math.abs(enemy.x - this.x) < 75 && Math.abs(enemy.y - this.y) < 78) {
+			if (Math.abs(enemy.x - this.x) < 75 && Math.abs(enemy.y - this.y) < 75) {
 				this.x = 202;
 				this.y = 400; 
+
 			}
 		}
 
@@ -129,9 +119,23 @@ class Player {
 				console.log(this.y);
 		}
 	}
-
+	    	
 };
 
+class GameLogic {
+	constructor(score) {
+		this.score = score;
+	}
+
+	increaseScore() {
+		console.log("increase");
+		if (player.win === true) {
+			console.log(this.score);
+			this.score += 1;
+			document.getElementById('score').innerText = this.score;
+		}
+	}
+};
 
 
 
@@ -148,7 +152,8 @@ let enemy1 = new Enemy(-15, 60);
 let enemy2 = new Enemy(-15, 150);
 let enemy3 = new Enemy(-15, 230);
 allEnemies.push(enemy1, enemy2, enemy3);
-
+let game = new GameLogic(0);
+document.getElementById('score').innerText = game.score;
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
