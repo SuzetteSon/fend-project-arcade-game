@@ -10,6 +10,7 @@ In this game there is a Player and Enemies (Bugs). The goal of the player is to 
 Score: I implemented a score for the game. Every win increases the score, and every collission decreases the score to a minimum of zero.
 
 **Opening the game**
+
 To play the game, open the index.html file in a JavaScript-enabled browser.
 
 **I needed to implement the Player and the Enemy classes, using Object-Oriented JavaScript.**
